@@ -14,14 +14,14 @@ Relative mapping needs to be used in order for the gitlab-runner to be able to c
 
 ### Example
 
-    git submodule add ../common/sdip-error-codes.git common-sdip/sdip-error-codes
+    git submodule add https://github.com/scania/sdos-error-code.git errorcode/sdos-error-code
 
 Run the command in the root of the parent repo, you should now have a new `.gitmodules` file in the
 root of your service repo, with the following content
 
-    [submodule "common-sdip/sdip-error-codes"]
-	  path = common-sdip/sdip-error-codes
-	  url = ../common/sdip-error-codes.git
+    [submodule "errorcode/sdos-error-code"]
+	  path = errorcode/sdos-error-code
+	  url = https://github.com/scania/sdos-error-code
 
 ## Update submodule
 
@@ -34,20 +34,12 @@ To update the submodule run (in repo root)
 Now the library can be found in `<repo-root>/common-sdip/sdip-error-codes` and may be included in
 the project by adding
 
-    include 'common-sdip:sdip-error-codes'
+    include 'errorcode:sdos-error-code'
 
 in settings.gradle and adding
 
-    implementation project(':common-sdip:sdip-error-codes')
+    implementation project(':errorcode:sdos-error-code')
 
 to build.gradle
 
-## Gitlab pipeline update
-
-In order for the gitlab pipeline to work, the following variable needs to be set in
-the `.gitlab-ci.yml`
-
-    # Make sure submodule is updated before running the jobs
-    variables:
-        GIT_SUBMODULE_STRATEGY: recursive
 
